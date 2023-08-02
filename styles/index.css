@@ -197,7 +197,7 @@ body {
     bottom: 1rem;
 
     margin: 0rem 2rem;
-    overflow: scroll;
+    overflow: auto;
 
     text-align: left;
 }
@@ -227,7 +227,7 @@ body {
     bottom: 1rem;
 
     margin: 0rem 2rem;
-    overflow: scroll;
+    overflow: auto;
 
     text-align: left;
 }
@@ -263,7 +263,7 @@ body {
 
     margin: 0rem 2rem;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .article-stat-list-item {
