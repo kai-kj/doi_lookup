@@ -24,8 +24,12 @@ export class Article {
         return crData && ocData ? new Article(crData, ocData) : null;
     };
 
+    getShortName = function () {
+        return `${this.getAuthors()[0].split(",")[0]}${this.getYear()}`;
+    };
+
     getTitle = function () {
-        return this.#data.title[0];
+        return this.#data.title[0] || "";
     };
 
     getAuthors = function () {
@@ -35,35 +39,35 @@ export class Article {
     };
 
     getPublisher = function () {
-        return this.#data.publisher;
+        return this.#data.publisher || "";
     };
 
     getSource = function () {
-        return this.#data[`container-title`];
+        return this.#data[`container-title`] || "";
     };
 
     getVolume = function () {
-        return this.#data.volume;
+        return this.#data.volume || "";
     };
 
     getIssue = function () {
-        return this.#data.issue;
+        return this.#data.issue || "";
     };
 
     getPage = function () {
-        return this.#data.page;
+        return this.#data.page || "";
     };
 
     getYear = function () {
-        return this.#data.issued[`date-parts`][0][0];
+        return this.#data.issued[`date-parts`][0][0] || "";
     };
 
     getMonth = function () {
-        return this.#data.issued[`date-parts`][0][1];
+        return this.#data.issued[`date-parts`][0][1] || "";
     };
 
     getDOI = function () {
-        return this.#data.DOI;
+        return this.#data.DOI || "";
     };
 
     getURL = function () {
@@ -71,7 +75,7 @@ export class Article {
     };
 
     getAbstract = function () {
-        return this.#data.abstract;
+        return this.#data.abstract || "";
     };
 
     getReferences = function () {
@@ -82,31 +86,20 @@ export class Article {
         return this.#citations;
     };
 
-    prettyString() {
+    toBibtex() {
         return (
-            `${this.getDOI()} \n` +
-            `  - url: ${this.getURL()} \n` +
-            `  - title: ${this.getTitle()} \n` +
-            `  - authors (${this.getAuthors().length}):\n` +
-            this.getAuthors()
-                .map((author) => `    - ${author}\n`)
-                .join(``) +
-            `  - publisher: ${this.getPublisher()} \n` +
-            `  - source: ${this.getSource()} \n` +
-            `  - volume: ${this.getVolume()} \n` +
-            `  - issue: ${this.getIssue()} \n` +
-            `  - page: ${this.getPage()} \n` +
-            `  - year: ${this.getYear()} \n` +
-            `  - month: ${this.getMonth()} \n` +
-            `  - abstract: ${this.getAbstract()}\n` +
-            `  - references (${this.getReferences().length}):\n` +
-            this.getReferences()
-                .map((reference) => `    - ${reference}\n`)
-                .join(``) +
-            `  - citations (${this.getCitations().length}):\n` +
-            this.getCitations()
-                .map((citation) => `    - ${citation}\n`)
-                .join(``)
+            `@article{${this.getShortName()}\n` +
+            `    title = {${this.getTitle()}}\n` +
+            `    author = {${this.getAuthors().join(" and ")}}\n` +
+            `    journal = {${this.getSource()}}\n` +
+            `    publisher = {${this.getPublisher()}}\n` +
+            `    volume = {${this.getVolume()}}\n` +
+            `    number = {${this.getIssue()}}\n` +
+            `    pages = {${this.getPage()}}\n` +
+            `    year = {${this.getYear()}}\n` +
+            `    month = {${this.getMonth()}}\n` +
+            `    abstract = {${this.getAbstract()}}\n` +
+            `}`
         );
     }
 

@@ -6,13 +6,13 @@
 	--on-surface: #cdcdcd; */
 
     --primary-color: #999999;
+    /* --primary-color: #999999; */
     /* --primary-color-highlighted: #6b3696; */
 
     font-family: "roboto";
 }
 
 a:link {
-    /* color: #3173ff; */
     color: rgb(50, 105, 255);
     text-decoration: none;
 }
@@ -24,8 +24,22 @@ a:visited {
 
 a:hover {
     color: rgb(255, 58, 58);
-    background-color: transparent;
     text-decoration: underline;
+}
+
+.hiddenLink:link {
+    color: black;
+    text-decoration: none;
+}
+
+.hiddenLink:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.hiddenLink:hover {
+    color: black;
+    text-decoration: none;
 }
 
 .border {
@@ -46,13 +60,13 @@ body {
 
 #header {
     position: absolute;
-    top: 2rem;
+    top: 1rem;
     left: 0;
     right: 0;
     height: 2rem;
 
     text-align: center;
-    font-size: 26px;
+    font-size: 20px;
 }
 
 #footer {
@@ -67,7 +81,7 @@ body {
 
 #body {
     position: absolute;
-    top: 6rem;
+    top: 4rem;
     left: 0;
     right: 0;
     bottom: 4rem;
@@ -90,6 +104,8 @@ body {
     width: 100%;
     border: none;
     outline: none;
+    border-bottom: 2px dotted var(--primary-color);
+    margin-right: 1rem;
 }
 
 #doi-search-button {
@@ -119,7 +135,7 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    height: 5rem;
+    height: 6rem;
 
     display: flex;
     flex-direction: column;
@@ -128,39 +144,26 @@ body {
 
 #article-info-title {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 #article-info-author {
     text-align: center;
 }
 
+#article-access {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+}
+
 #article-stat-section {
     position: absolute;
-    top: 8rem;
+    top: 9rem;
     left: 0;
     right: 0;
     bottom: 0;
-}
-
-#article-stat-citation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 50%;
-    bottom: 0;
-
-    margin-right: 1rem;
-}
-
-#article-stat-reference {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    right: 0;
-    bottom: 0;
-
-    margin-left: 1rem;
 }
 
 .article-stat-title {
@@ -175,6 +178,82 @@ body {
     align-items: center;
 }
 
+#article-abstract {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 50%;
+    bottom: 50%;
+
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+}
+
+#article-abstract-field {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+
+    margin: 0rem 2rem;
+    overflow: scroll;
+
+    text-align: left;
+}
+
+#article-bibtex {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 0;
+    bottom: 50%;
+
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+}
+
+#article-bibtex-copy {
+    position: absolute;
+    top: 2.5rem;
+    right: 2.5rem;
+}
+
+#article-bibtex-field {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+
+    margin: 0rem 2rem;
+    overflow: scroll;
+
+    text-align: left;
+}
+
+#article-stat-citation {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 50%;
+    bottom: 0;
+
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+
+#article-stat-reference {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: 0;
+    bottom: 0;
+
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
 .article-stat-list {
     position: absolute;
     top: 2rem;
@@ -182,8 +261,7 @@ body {
     right: 0;
     bottom: 1rem;
 
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin: 0rem 2rem;
     overflow-x: hidden;
     overflow-y: scroll;
 }

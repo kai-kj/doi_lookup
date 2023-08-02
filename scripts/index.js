@@ -3,6 +3,9 @@ import { Article } from "./article.js";
 /*
     10.1016/j.imavis.2005.02.004
 */
+
+const headerLink = document.getElementById(`header-link`);
+
 const doiSearchField = document.getElementById(`doi-search-field`);
 const doiSearchButton = document.getElementById(`doi-search-button`);
 
@@ -11,6 +14,12 @@ const msgSection = document.getElementById(`msg-section`);
 const articleInfoSection = document.getElementById(`article-section`);
 const articleInfoTitle = document.getElementById(`article-info-title`);
 const articleInfoAuthor = document.getElementById(`article-info-author`);
+const articleAccess = document.getElementById(`article-access`);
+
+const articleBibtexField = document.getElementById(`article-bibtex-field`);
+const articleBibtexCopy = document.getElementById(`article-bibtex-copy`);
+
+const articleAbstractField = document.getElementById(`article-abstract-field`);
 
 const articleStatCitation = document.getElementById(`article-stat-cit`);
 const articleStatReference = document.getElementById(`article-stat-ref`);
@@ -53,6 +62,9 @@ const showArticleCurrent = function () {
     articleInfoAuthor.innerHTML = `${currentArticle
         .getAuthors()
         .join(`&nbsp&nbsp&nbsp&nbsp`)}`;
+
+    articleBibtexField.innerHTML = `${currentArticle.toBibtex()}`;
+    articleAbstractField.innerHTML = `${currentArticle.getAbstract()}`;
 
     while (articleStatCitation.firstChild) {
         articleStatCitation.removeChild(articleStatCitation.firstChild);
@@ -123,7 +135,17 @@ doiSearchButton.addEventListener(`click`, async function (event) {
     search(doiSearchField.value.trim());
 });
 
+articleAccess.addEventListener(`click`, async function (event) {
+    window.open(currentArticle.getURL());
+});
+
+articleBibtexCopy.addEventListener(`click`, async function (event) {
+    navigator.clipboard.writeText(currentArticle.toBibtex());
+});
+
 window.onpageshow = function () {
+    headerLink.href = window.location.href.split(`?`)[0];
+
     showArticleNone();
 
     const urlParams = new URLSearchParams(window.location.search);

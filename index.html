@@ -20,7 +20,9 @@
     </head>
 
     <body>
-        <div id="header">DOI Lookup Tool</div>
+        <div id="header">
+            <a id="header-link" class="hiddenLink" href="">DOI Lookup</a>
+        </div>
 
         <div id="body">
             <div id="doi-search-section" , class="border">
@@ -28,14 +30,27 @@
                 <button id="doi-search-button">Search</button>
             </div>
 
-            <div id="msg-section">AA</div>
+            <div id="msg-section"></div>
 
             <div id="article-section">
                 <div id="article-info-section" class="border">
                     <div id="article-info-title"></div>
                     <div id="article-info-author"></div>
+                    <button id="article-access">get access</button>
                 </div>
+
                 <div id="article-stat-section">
+                    <div id="article-abstract" class="border">
+                        <div class="article-stat-title">Abstract</div>
+                        <div id="article-abstract-field" class="border"></div>
+                    </div>
+
+                    <div id="article-bibtex" class="border">
+                        <div class="article-stat-title">Cite</div>
+                        <pre id="article-bibtex-field" class="border"></pre>
+                        <button id="article-bibtex-copy">copy</button>
+                    </div>
+
                     <div id="article-stat-citation" class="border">
                         <div class="article-stat-title">Citations</div>
                         <div
@@ -43,6 +58,7 @@
                             id="article-stat-cit"
                         ></div>
                     </div>
+
                     <div id="article-stat-reference" class="border">
                         <div class="article-stat-title">References</div>
                         <div
