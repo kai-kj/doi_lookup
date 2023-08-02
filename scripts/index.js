@@ -1,132 +1,132 @@
-Article = class {
-    #data = {};
-    #references = [];
-    #citations = [];
+import { Article } from "./article.js";
 
-    constructor(crData, ocData) {
-        this.#data = crData;
+/*
+    10.1016/j.imavis.2005.02.004
+*/
+const doiSearchField = document.getElementById(`doi-search-field`);
+const doiSearchButton = document.getElementById(`doi-search-button`);
 
-        this.#references = ocData.reference
-            .split(";")
-            .map((reference) => reference.trim())
-            .filter((reference) => reference != "");
+const msgSection = document.getElementById(`msg-section`);
 
-        this.#citations = ocData.citation
-            .split(";")
-            .map((reference) => reference.trim())
-            .filter((reference) => reference != "");
-    }
+const articleInfoSection = document.getElementById(`article-info-section`);
+const articleInfoTitle = document.getElementById(`article-info-title`);
+const articleInfoAuthor = document.getElementById(`article-info-author`);
 
-    static from = async function (doi) {
-        const crURL = "https://api.crossref.org/works";
-        const ocURL = "https://opencitations.net/index/api/v1/metadata";
+const articleStatCitation = document.getElementById(`article-stat-cit`);
+const articleStatReference = document.getElementById(`article-stat-ref`);
 
-        const crData = fetch(`${crURL}/${doi}`)
-            .then((data) => data.json())
-            .then((data) => data.message);
+let currentArticle = undefined;
 
-        const ocData = fetch(`${ocURL}/${doi}`)
-            .then((data) => data.json())
-            .then((data) => data[0]);
-
-        return new Article(await crData, await ocData);
-    };
-
-    getTitle = function () {
-        return this.#data.title[0];
-    };
-
-    getAuthors = function () {
-        return this.#data.author.map(
-            (author) => `${author.family}, ${author.given}`
-        );
-    };
-
-    getPublisher = function () {
-        return this.#data.publisher;
-    };
-
-    getSource = function () {
-        return this.#data["container-title"];
-    };
-
-    getVolume = function () {
-        return this.#data.volume;
-    };
-
-    getIssue = function () {
-        return this.#data.issue;
-    };
-
-    getPage = function () {
-        return this.#data.page;
-    };
-
-    getYear = function () {
-        return this.#data.issued["date-parts"][0][0];
-    };
-
-    getMonth = function () {
-        return this.#data.issued["date-parts"][0][1];
-    };
-
-    getDOI = function () {
-        return this.#data.DOI;
-    };
-
-    getURL = function () {
-        return `https://doi.org/${this.#data.DOI}`;
-    };
-
-    getAbstract = function () {
-        return this.#data.abstract;
-    };
-
-    getReferences = function () {
-        return this.#references;
-    };
-
-    getCitations = function () {
-        return this.#citations;
-    };
-
-    toString = function () {
-        return this.getDOI();
-    };
-
-    prettyString() {
-        return (
-            `${this.getDOI()} \n` +
-            `  - url: ${this.getURL()} \n` +
-            `  - title: ${this.getTitle()} \n` +
-            `  - authors (${this.getAuthors().length}):\n` +
-            this.getAuthors()
-                .map((author) => `    - ${author}\n`)
-                .join("") +
-            `  - publisher: ${this.getPublisher()} \n` +
-            `  - source: ${this.getSource()} \n` +
-            `  - volume: ${this.getVolume()} \n` +
-            `  - issue: ${this.getIssue()} \n` +
-            `  - page: ${this.getPage()} \n` +
-            `  - year: ${this.getYear()} \n` +
-            `  - month: ${this.getMonth()} \n` +
-            `  - abstract: ${this.getAbstract()}\n` +
-            `  - references (${this.getReferences().length}):\n` +
-            this.getReferences()
-                .map((reference) => `    - ${reference}\n`)
-                .join("") +
-            `  - citations (${this.getCitations().length}):\n` +
-            this.getCitations()
-                .map((citation) => `    - ${citation}\n`)
-                .join("")
-        );
-    }
+const createSpinner = function (size) {
+    const spinner = document.createElement(`div`);
+    spinner.classList.add(`spinner`);
+    spinner.style.width = size;
+    spinner.style.height = size;
+    return spinner;
 };
 
-main = async function () {
-    const doi = `10.1016/j.imavis.2005.02.004`;
-    const article = await Article.from(doi);
-    console.log(`${article.prettyString()}`);
+const createArticleStatListItem = function (doi, parent) {
+    const a = document.createElement(`a`);
+    a.href = `${window.location.href.split(`?`)[0]}?doi=${doi}`;
+    a.appendChild(createSpinner(`12px`));
+    a.appendChild(document.createTextNode(`${doi}`));
+
+    const div = document.createElement(`div`);
+    div.classList.add(`article-stat-list-item`);
+    div.appendChild(a);
+
+    parent.appendChild(div);
+
+    Article.from(doi).then((article) => {
+        a.innerHTML = article.getTitle();
+    });
 };
 
-main();
+const showArticleCurrent = function () {
+    if (currentArticle === undefined) {
+        console.log(`article undefined`);
+        return;
+    }
+
+    articleInfoTitle.innerHTML = `${currentArticle.getTitle()}`;
+    articleInfoAuthor.innerHTML = `${currentArticle.getAuthors().join(`  `)}`;
+
+    while (articleStatCitation.firstChild) {
+        articleStatCitation.removeChild(articleStatCitation.firstChild);
+    }
+
+    while (articleStatReference.firstChild) {
+        articleStatReference.removeChild(articleStatReference.firstChild);
+    }
+
+    currentArticle
+        .getCitations()
+        .map((doi) => createArticleStatListItem(doi, articleStatCitation));
+
+    currentArticle
+        .getReferences()
+        .map((doi) => createArticleStatListItem(doi, articleStatReference));
+
+    articleInfoSection.style.display = `block`;
+    msgSection.style.display = `none`;
+};
+
+const showArticleSearching = function () {
+    while (msgSection.firstChild) msgSection.removeChild(msgSection.firstChild);
+    msgSection.appendChild(createSpinner(`20px`));
+
+    articleInfoSection.style.display = `none`;
+    msgSection.style.display = `block`;
+};
+
+const showArticleNotFound = function () {
+    while (msgSection.firstChild) msgSection.removeChild(msgSection.firstChild);
+    msgSection.innerHTML = `article not found`;
+
+    articleInfoSection.style.display = `none`;
+    msgSection.style.display = `block`;
+};
+
+const showArticleNone = function () {
+    articleInfoSection.style.display = `none`;
+    msgSection.style.display = `none`;
+};
+
+const search = async function (doi) {
+    showArticleSearching();
+    currentArticle = await Article.from(doi);
+
+    if (currentArticle) {
+        showArticleCurrent();
+    } else {
+        showArticleNotFound();
+    }
+
+    // window.location.search = doi;
+    window.history.replaceState(
+        {},
+        ``,
+        `${window.location.href.split(`?`)[0]}?doi=${doi}`
+    );
+};
+
+doiSearchField.addEventListener(`keypress`, function (event) {
+    if (event.key === `Enter`) {
+        doiSearchButton.click();
+    }
+});
+
+doiSearchButton.addEventListener(`click`, async function (event) {
+    search(doiSearchField.value.trim());
+});
+
+window.onload = function () {
+    showArticleNone();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const doi = urlParams.get(`doi`);
+    if (doi != null) {
+        doiSearchField.value = doi;
+        doiSearchButton.click();
+    }
+};

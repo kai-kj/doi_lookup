@@ -20,14 +20,44 @@
     </head>
 
     <body>
-        <div class="header"></div>
+        <div id="header">DOI Lookup Tool</div>
 
-        <div class="body">
-            <div class="search-bar"></div>
+        <div id="body">
+            <div id="doi-search-section">
+                <input id="doi-search-field" type="text" placeholder="DOI" />
+                <button id="doi-search-button">Lookup</button>
+            </div>
+
+            <div id="msg-section">AA</div>
+
+            <div id="article-info-section">
+                <div id="article-info-title"></div>
+                <div id="article-info-author"></div>
+                <div id="article-stat-section">
+                    <div id="article-stat-citation">
+                        <div class="article-stat-title">Citations</div>
+                        <!-- <div class="article-stat-list-wrapper"> -->
+                        <div
+                            class="article-stat-list"
+                            id="article-stat-cit"
+                        ></div>
+                        <!-- </div> -->
+                    </div>
+                    <div id="article-stat-reference">
+                        <div class="article-stat-title">References</div>
+                        <!-- <div class="article-stat-list-wrapper"> -->
+                        <div
+                            class="article-stat-list"
+                            id="article-stat-ref"
+                        ></div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="footer"></div>
+        <div id="footer">Github: foo Contact: bar</div>
 
-        <script src="scripts/index.js"></script>
+        <script src="scripts/index.js" type="module"></script>
     </body>
 </html>
