@@ -8,7 +8,7 @@ const doiSearchButton = document.getElementById(`doi-search-button`);
 
 const msgSection = document.getElementById(`msg-section`);
 
-const articleInfoSection = document.getElementById(`article-info-section`);
+const articleInfoSection = document.getElementById(`article-section`);
 const articleInfoTitle = document.getElementById(`article-info-title`);
 const articleInfoAuthor = document.getElementById(`article-info-author`);
 
@@ -26,19 +26,20 @@ const createSpinner = function (size) {
 };
 
 const createArticleStatListItem = function (doi, parent) {
-    const a = document.createElement(`a`);
-    a.href = `${window.location.href.split(`?`)[0]}?doi=${doi}`;
-    a.appendChild(createSpinner(`12px`));
-    a.appendChild(document.createTextNode(`${doi}`));
-
     const div = document.createElement(`div`);
     div.classList.add(`article-stat-list-item`);
-    div.appendChild(a);
+    div.classList.add(`border`);
+    div.appendChild(createSpinner(`12px`));
+    div.appendChild(document.createTextNode(`${doi}`));
 
-    parent.appendChild(div);
+    const a = document.createElement(`a`);
+    a.href = `${window.location.href.split(`?`)[0]}?doi=${doi}`;
+    a.appendChild(div);
+
+    parent.appendChild(a);
 
     Article.from(doi).then((article) => {
-        a.innerHTML = article.getTitle();
+        if (article) div.innerHTML = article.getTitle();
     });
 };
 
@@ -49,7 +50,9 @@ const showArticleCurrent = function () {
     }
 
     articleInfoTitle.innerHTML = `${currentArticle.getTitle()}`;
-    articleInfoAuthor.innerHTML = `${currentArticle.getAuthors().join(`  `)}`;
+    articleInfoAuthor.innerHTML = `${currentArticle
+        .getAuthors()
+        .join(`&nbsp&nbsp&nbsp&nbsp`)}`;
 
     while (articleStatCitation.firstChild) {
         articleStatCitation.removeChild(articleStatCitation.firstChild);
@@ -120,7 +123,7 @@ doiSearchButton.addEventListener(`click`, async function (event) {
     search(doiSearchField.value.trim());
 });
 
-window.onload = function () {
+window.onpageshow = function () {
     showArticleNone();
 
     const urlParams = new URLSearchParams(window.location.search);

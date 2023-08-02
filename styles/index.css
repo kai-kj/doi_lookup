@@ -1,158 +1,186 @@
 :root {
+    --background-color: #ffffff;
+
+    /* --surface-color: #222222;
+	--surface-color-2: #353535;
+	--on-surface: #cdcdcd; */
+
+    --primary-color: #999999;
+    /* --primary-color-highlighted: #6b3696; */
+
     font-family: "roboto";
 }
 
-html {
+a:link {
+    /* color: #3173ff; */
+    color: rgb(50, 105, 255);
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(142, 20, 255);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255, 58, 58);
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.border {
+    border-color: var(--primary-color);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+html,
+body {
+    position: relative;
     height: 100%;
     margin: 0;
 }
 
-body {
-    height: 100%;
-    margin: auto;
-    position: relative;
-}
-
 #header {
     position: absolute;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-    bottom: 90%;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    height: 2rem;
 
-    margin: 1rem;
     text-align: center;
     font-size: 26px;
 }
 
 #footer {
     position: absolute;
-    top: 90%;
-    left: 0%;
-    right: 0%;
-    bottom: 0%;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+    height: 2rem;
 
-    margin: 1rem;
     text-align: center;
 }
 
 #body {
     position: absolute;
-    top: 10%;
-    left: 0%;
-    right: 0%;
-    bottom: 10%;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    bottom: 4rem;
 
     margin: 0 10%;
-    display: flex;
-    flex-direction: column;
 }
 
 #doi-search-section {
     position: absolute;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-    bottom: 90%;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
+
     display: flex;
+    align-items: center;
 }
 
 #doi-search-field {
     width: 100%;
-    margin: 1rem;
+    border: none;
+    outline: none;
 }
 
 #doi-search-button {
     float: right;
-    margin: 1rem;
-}
-
-#doi-search-status {
-    text-align: center;
-    font-size: 14px;
 }
 
 #msg-section {
     position: absolute;
-    top: 10%;
-    left: 0%;
-    right: 0%;
-    bottom: 0%;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
 
     text-align: center;
 }
 
+#article-section {
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 #article-info-section {
     position: absolute;
-    top: 10%;
-    left: 0%;
-    right: 0%;
-    bottom: 0%;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5rem;
 
-    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #article-info-title {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-    bottom: 95%;
-
     text-align: center;
     font-size: 20px;
 }
 
 #article-info-author {
-    position: absolute;
-    top: 5%;
-    left: 0%;
-    right: 0%;
-    bottom: 90%;
-
     text-align: center;
 }
 
 #article-stat-section {
     position: absolute;
-    top: 15%;
-    left: 0%;
-    right: 0%;
-    bottom: 0%;
+    top: 8rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 #article-stat-citation {
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top: 0;
+    left: 0;
     right: 50%;
-    bottom: 0%;
+    bottom: 0;
+
+    margin-right: 1rem;
 }
 
 #article-stat-reference {
     position: absolute;
-    top: 0%;
+    top: 0;
     left: 50%;
-    right: 0%;
-    bottom: 0%;
+    right: 0;
+    bottom: 0;
+
+    margin-left: 1rem;
 }
 
 .article-stat-title {
     position: absolute;
-    top: 0%;
-    left: 0%;
-    right: 0%;
-    bottom: 90%;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
 
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .article-stat-list {
     position: absolute;
-    top: 10%;
-    left: 0%;
-    right: 0%;
-    bottom: 0%;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
 
     margin-left: 2rem;
     margin-right: 2rem;
@@ -161,9 +189,8 @@ body {
 }
 
 .article-stat-list-item {
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
     margin: 0.5rem;
 }
 

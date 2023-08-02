@@ -18,14 +18,10 @@ export class Article {
     }
 
     static from = async function (doi) {
-        try {
-            const crData = Article.#getCrData(doi);
-            const ocData = Article.#getOcData(doi);
-            return new Article(await crData, await ocData);
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
+        const crData = await Article.#getCrData(doi);
+        const ocData = await Article.#getOcData(doi);
+
+        return crData && ocData ? new Article(crData, ocData) : null;
     };
 
     getTitle = function () {
@@ -117,26 +113,48 @@ export class Article {
     static #getCrData = async function (doi) {
         const url = `https://api.crossref.org/works/${doi}`;
 
-        const local = sessionStorage.getItem(url);
-        if (local != null && local != "{}") return JSON.parse(local);
+        try {
+            const local = sessionStorage.getItem(url);
+            if (local) return JSON.parse(local);
+        } catch (error) {
+            console.warn(error);
+        }
 
         const remote = await fetch(url)
             .then((data) => data.json())
-            .then((data) => data.message);
-        sessionStorage.setItem(url, JSON.stringify(remote));
+            .then((data) => data.message)
+            .catch((error) => console.warn(error));
+
+        try {
+            sessionStorage.setItem(url, JSON.stringify(remote));
+        } catch (error) {
+            sessionStorage.clear();
+        }
+
         return remote;
     };
 
     static #getOcData = async function (doi) {
         const url = `https://opencitations.net/index/api/v1/metadata/${doi}`;
 
-        const local = sessionStorage.getItem(url);
-        if (local != null && local != "{}") return JSON.parse(local);
+        try {
+            const local = sessionStorage.getItem(url);
+            if (local) return JSON.parse(local);
+        } catch (error) {
+            console.warn(error);
+        }
 
         const remote = await fetch(url)
             .then((data) => data.json())
-            .then((data) => data[0]);
-        sessionStorage.setItem(url, JSON.stringify(remote));
+            .then((data) => data[0])
+            .catch((error) => console.warn(error));
+
+        try {
+            sessionStorage.setItem(url, JSON.stringify(remote));
+        } catch (error) {
+            sessionStorage.clear();
+        }
+
         return remote;
     };
 }

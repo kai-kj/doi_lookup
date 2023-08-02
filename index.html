@@ -23,40 +23,46 @@
         <div id="header">DOI Lookup Tool</div>
 
         <div id="body">
-            <div id="doi-search-section">
+            <div id="doi-search-section" , class="border">
                 <input id="doi-search-field" type="text" placeholder="DOI" />
-                <button id="doi-search-button">Lookup</button>
+                <button id="doi-search-button">Search</button>
             </div>
 
             <div id="msg-section">AA</div>
 
-            <div id="article-info-section">
-                <div id="article-info-title"></div>
-                <div id="article-info-author"></div>
+            <div id="article-section">
+                <div id="article-info-section" class="border">
+                    <div id="article-info-title"></div>
+                    <div id="article-info-author"></div>
+                </div>
                 <div id="article-stat-section">
-                    <div id="article-stat-citation">
+                    <div id="article-stat-citation" class="border">
                         <div class="article-stat-title">Citations</div>
-                        <!-- <div class="article-stat-list-wrapper"> -->
                         <div
                             class="article-stat-list"
                             id="article-stat-cit"
                         ></div>
-                        <!-- </div> -->
                     </div>
-                    <div id="article-stat-reference">
+                    <div id="article-stat-reference" class="border">
                         <div class="article-stat-title">References</div>
-                        <!-- <div class="article-stat-list-wrapper"> -->
                         <div
-                            class="article-stat-list"
                             id="article-stat-ref"
+                            class="article-stat-list"
                         ></div>
-                        <!-- </div> -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="footer">Github: foo Contact: bar</div>
+        <div id="footer">
+            <a href="https://github.com/kal39/doi_lookup">
+                <i class="fab fa-github"></i> kal39/doi_lookup
+            </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="mailto:kaikitagawajones@gmail.com">
+                <i class="fas fa-envelope"></i> kaikitagawajones@gmail.com
+            </a>
+        </div>
 
         <script src="scripts/index.js" type="module"></script>
     </body>
