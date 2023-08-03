@@ -69,25 +69,31 @@ const showArticleCurrent = function () {
             node.clear().addChildren(dois.map((doi) => createPreview(doi)))
         );
 
-    SF.query(`#article-section`).setStyle(`display`, `block`);
+    SF.query(`#home-section`).setStyle(`display`, `none`);
     SF.query(`#msg-section`).setStyle(`display`, `none`);
+    SF.query(`#article-section`).setStyle(`display`, `block`);
 };
 
 const showArticleSearching = function () {
     SF.query(`#msg-section`).clear().addChild(createSpinner(`20px`));
-    SF.query(`#article-section`).setStyle(`display`, `none`);
+
+    SF.query(`#home-section`).setStyle(`display`, `none`);
     SF.query(`#msg-section`).setStyle(`display`, `block`);
+    SF.query(`#article-section`).setStyle(`display`, `none`);
 };
 
 const showArticleNotFound = function () {
     SF.query(`#msg-section`).clear().addChild(`article not found`);
-    SF.query(`#article-section`).setStyle(`display`, `none`);
+
+    SF.query(`#home-section`).setStyle(`display`, `none`);
     SF.query(`#msg-section`).setStyle(`display`, `block`);
+    SF.query(`#article-section`).setStyle(`display`, `none`);
 };
 
 const showArticleNone = function () {
-    SF.query(`#article-section`).setStyle(`display`, `none`);
+    SF.query(`#home-section`).setStyle(`display`, `flex`);
     SF.query(`#msg-section`).setStyle(`display`, `none`);
+    SF.query(`#article-section`).setStyle(`display`, `none`);
 };
 
 const search = async function (doi) {
@@ -197,7 +203,7 @@ SF.query(`#reference-expand`).onEvent(`click`, (_) =>
 );
 
 window.onpageshow = function () {
-    SF.query(`#header-link`).href = getURL();
+    SF.query(`#header-link`).setAttribute(`href`, getURL());
     showArticleNone();
 
     const urlParams = new URLSearchParams(window.location.search);
