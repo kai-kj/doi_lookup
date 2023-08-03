@@ -151,6 +151,8 @@ body {
     bottom: 0;
 
     text-align: center;
+
+    display: none;
 }
 
 #article-section {
@@ -159,6 +161,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
+
+    display: none;
 }
 
 #article-info-section {
