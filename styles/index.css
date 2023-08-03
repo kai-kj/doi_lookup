@@ -51,6 +51,23 @@ a:hover {
     text-align: center;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+/* tr {
+    padding: 0 1rem;
+} */
+
+td {
+    border-right: 2px solid var(--primary-color);
+    padding: 0.25rem 1rem;
+}
+
+td:last-of-type {
+    border: none;
+}
+
 html,
 body {
     position: relative;
@@ -150,6 +167,7 @@ body {
 
 #article-info-author {
     text-align: center;
+    white-space: pre-wrap;
 }
 
 #article-access {
@@ -178,7 +196,17 @@ body {
     align-items: center;
 }
 
-#article-abstract {
+.stat-expand {
+    color: var(--primary-color);
+    font-size: 12px;
+
+    border: none;
+    background-color: #ffffff00;
+
+    cursor: pointer;
+}
+
+#article-details {
     position: absolute;
     top: 0;
     left: 0;
@@ -187,19 +215,31 @@ body {
 
     margin-bottom: 1rem;
     margin-right: 1rem;
+
+    background-color: #ffffffff;
 }
 
-#article-abstract-field {
+#article-details-table-container {
     position: absolute;
     top: 2rem;
     left: 0;
     right: 0;
     bottom: 1rem;
 
-    margin: 0rem 2rem;
+    margin: 0 1rem 1rem 0.5rem;
     overflow: auto;
+}
 
+#article-details-table {
+    white-space: pre-wrap;
     text-align: left;
+    font-size: 14px;
+}
+
+#details-expand {
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 #article-cite {
@@ -211,25 +251,60 @@ body {
 
     margin-bottom: 1rem;
     margin-left: 1rem;
+
+    background-color: #ffffffff;
+}
+
+#article-cite-types {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    height: 1.5rem;
+}
+
+#article-cite-field {
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+
+    margin: 0 1rem 1rem 0.5rem;
+    overflow: auto;
+
+    text-align: left;
+    font-size: 12px;
 }
 
 #article-cite-copy {
     position: absolute;
-    top: 2.5rem;
-    right: 2.5rem;
+    bottom: 2.5rem;
+    right: 1.5rem;
 }
 
-#article-cite-field {
+#cite-expand {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.article-stat-list {
     position: absolute;
     top: 2rem;
     left: 0;
     right: 0;
     bottom: 1rem;
 
-    margin: 0rem 2rem;
-    overflow: auto;
+    margin: 0 1rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
-    text-align: left;
+.article-stat-list-item {
+    overflow: hidden;
+    font-size: 14px;
+    margin: 0.5rem;
 }
 
 #article-stat-citation {
@@ -241,6 +316,14 @@ body {
 
     margin-top: 1rem;
     margin-right: 1rem;
+
+    background-color: #ffffffff;
+}
+
+#citation-expand {
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 #article-stat-reference {
@@ -252,24 +335,14 @@ body {
 
     margin-top: 1rem;
     margin-left: 1rem;
+
+    background-color: #ffffffff;
 }
 
-.article-stat-list {
+#reference-expand {
     position: absolute;
-    top: 2rem;
     left: 0;
-    right: 0;
-    bottom: 1rem;
-
-    margin: 0rem 2rem;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-.article-stat-list-item {
-    overflow: hidden;
-    font-size: 14px;
-    margin: 0.5rem;
+    top: 0;
 }
 
 @keyframes spinner {

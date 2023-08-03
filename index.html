@@ -40,15 +40,31 @@
                 </div>
 
                 <div id="article-stat-section">
-                    <div id="article-abstract" class="border">
-                        <div class="article-stat-title">Abstract</div>
-                        <div id="article-abstract-field" class="border"></div>
+                    <div id="article-details" class="border">
+                        <div class="article-stat-title">Details</div>
+                        <div
+                            id="article-details-table-container"
+                            class="border"
+                        >
+                            <table id="article-details-table"></table>
+                        </div>
+                        <button id="details-expand" class="stat-expand">
+                            expand
+                        </button>
                     </div>
 
                     <div id="article-cite" class="border">
                         <div class="article-stat-title">Cite</div>
+                        <div id="article-cite-types">
+                            <button id="article-cite-plain">plain text</button>
+                            <button id="article-cite-bib">BibTeX</button>
+                            <button id="article-cite-ris">RIS</button>
+                        </div>
                         <pre id="article-cite-field" class="border"></pre>
                         <button id="article-cite-copy">copy</button>
+                        <button id="cite-expand" class="stat-expand">
+                            expand
+                        </button>
                     </div>
 
                     <div id="article-stat-citation" class="border">
@@ -57,6 +73,9 @@
                             class="article-stat-list"
                             id="article-stat-cit"
                         ></div>
+                        <button id="citation-expand" class="stat-expand">
+                            expand
+                        </button>
                     </div>
 
                     <div id="article-stat-reference" class="border">
@@ -65,6 +84,9 @@
                             id="article-stat-ref"
                             class="article-stat-list"
                         ></div>
+                        <button id="reference-expand" class="stat-expand">
+                            expand
+                        </button>
                     </div>
                 </div>
             </div>

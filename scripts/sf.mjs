@@ -50,7 +50,7 @@ SF.Node = class {
     addClass = function (className) {
         this.setAttribute(
             `class`,
-            `${this.getAttribute("class")} ${className}`.trim()
+            `${this.getAttribute(`class`)} ${className}`.trim()
         );
         return this;
     };
@@ -75,6 +75,10 @@ SF.Node = class {
         return this;
     };
 
+    getParent = function () {
+        return SF.Node.fromRawElement(this.#rawElement.parentElement);
+    };
+
     getChildren = function () {
         return Array.from(this.#rawElement.childNodes)
             .map((child) =>
@@ -90,7 +94,7 @@ SF.Node = class {
     addChild = function (child) {
         child instanceof SF.Node
             ? this.#rawElement.appendChild(child.getRawElement())
-            : typeof child == "string"
+            : typeof child == `string`
             ? this.#rawElement.appendChild(document.createTextNode(child))
             : null;
         return this;
@@ -127,7 +131,15 @@ SF.Node = class {
         return this;
     };
 
+    getContents = function () {
+        return this.#rawElement.textContent;
+    };
+
     toString = function () {
         return this.#rawElement.outerHTML;
     };
+};
+
+SF.query = function (query) {
+    return SF.Node.fromQuery(`${query}`);
 };

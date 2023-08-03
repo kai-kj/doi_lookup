@@ -16,11 +16,11 @@ export class Article {
     };
 
     getShortName = function () {
-        return `${this.getAuthors()[0].split(",")[0]}${this.getYear()}`;
+        return `${this.getAuthors()[0].split(`,`)[0]}${this.getYear()}`;
     };
 
     getTitle = function () {
-        return this.#crData.title[0] || "";
+        return this.#crData.title[0] || ``;
     };
 
     getAuthors = function () {
@@ -30,35 +30,35 @@ export class Article {
     };
 
     getPublisher = function () {
-        return this.#crData.publisher || "";
+        return this.#crData.publisher || ``;
     };
 
     getSource = function () {
-        return this.#crData[`container-title`] || "";
+        return this.#crData[`container-title`] || ``;
     };
 
     getVolume = function () {
-        return this.#crData.volume || "";
+        return this.#crData.volume || ``;
     };
 
     getIssue = function () {
-        return this.#crData.issue || "";
+        return this.#crData.issue || ``;
     };
 
     getPage = function () {
-        return this.#crData.page || "";
+        return this.#crData.page || ``;
     };
 
     getYear = function () {
-        return this.#crData.issued[`date-parts`][0][0] || "";
+        return this.#crData.issued[`date-parts`][0][0] || ``;
     };
 
     getMonth = function () {
-        return this.#crData.issued[`date-parts`][0][1] || "";
+        return this.#crData.issued[`date-parts`][0][1] || ``;
     };
 
     getDOI = function () {
-        return this.#crData.DOI || "";
+        return this.#crData.DOI || ``;
     };
 
     getURL = function () {
@@ -66,7 +66,7 @@ export class Article {
     };
 
     getAbstract = function () {
-        return this.#crData.abstract || "";
+        return this.#crData.abstract || ``;
     };
 
     getCitations = async function () {
@@ -97,32 +97,21 @@ export class Article {
 
     asPlaintext = async function () {
         return fetch(this.getURL(), {
-            headers: { Accept: "text/x-bibliography" },
+            headers: { Accept: `text/x-bibliography` },
         }).then((response) => response.text());
     };
 
-    asBibtext = async function () {
+    asBibTeX = async function () {
         return fetch(this.getURL(), {
-            headers: { Accept: "application/x-bibtex" },
+            headers: { Accept: `application/x-bibtex` },
         }).then((response) => response.text());
     };
 
-    toBibtex() {
-        return (
-            `@article{${this.getShortName()},\n` +
-            `    title = {${this.getTitle()}},\n` +
-            `    author = {${this.getAuthors().join(" and ")}},\n` +
-            `    journal = {${this.getSource()}},\n` +
-            `    publisher = {${this.getPublisher()}},\n` +
-            `    volume = {${this.getVolume()}},\n` +
-            `    number = {${this.getIssue()}},\n` +
-            `    pages = {${this.getPage()}},\n` +
-            `    year = {${this.getYear()}},\n` +
-            `    month = {${this.getMonth()}},\n` +
-            `    abstract = {${this.getAbstract()}},\n` +
-            `}`
-        );
-    }
+    asRIS = async function () {
+        return fetch(this.getURL(), {
+            headers: { Accept: `application/x-research-info-systems` },
+        }).then((response) => response.text());
+    };
 
     static #getCrData = async function (doi) {
         try {
