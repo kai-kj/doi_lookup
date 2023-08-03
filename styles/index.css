@@ -27,17 +27,17 @@ a:hover {
     text-decoration: underline;
 }
 
-.hiddenLink:link {
+.hidden-link:link {
     color: black;
     text-decoration: none;
 }
 
-.hiddenLink:visited {
+.hidden-link:visited {
     color: black;
     text-decoration: none;
 }
 
-.hiddenLink:hover {
+.hidden-link:hover {
     color: black;
     text-decoration: none;
 }
@@ -80,10 +80,19 @@ body {
     top: 1rem;
     left: 0;
     right: 0;
-    height: 2rem;
+    height: 3rem;
 
     text-align: center;
     font-size: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#header-logo {
+    height: 3rem;
+    image-rendering: pixelated;
 }
 
 #footer {
@@ -98,7 +107,7 @@ body {
 
 #body {
     position: absolute;
-    top: 4rem;
+    top: 5rem;
     left: 0;
     right: 0;
     bottom: 4rem;
@@ -140,7 +149,15 @@ body {
     overflow: auto;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+#home-logo {
+    height: 10rem;
+    min-height: 10rem;
+    image-rendering: pixelated;
 }
 
 #msg-section {
