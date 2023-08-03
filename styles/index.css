@@ -202,7 +202,7 @@ body {
     text-align: left;
 }
 
-#article-bibtex {
+#article-cite {
     position: absolute;
     top: 0;
     left: 50%;
@@ -213,13 +213,13 @@ body {
     margin-left: 1rem;
 }
 
-#article-bibtex-copy {
+#article-cite-copy {
     position: absolute;
     top: 2.5rem;
     right: 2.5rem;
 }
 
-#article-bibtex-field {
+#article-cite-field {
     position: absolute;
     top: 2rem;
     left: 0;

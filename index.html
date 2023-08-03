@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Home</title>
+        <title>DOI Lookup</title>
         <link rel="stylesheet" href="styles/index.css" />
         <link rel="icon" href="assets/logo.png" />
         <!-- fonts -->
@@ -27,7 +27,7 @@
         <div id="body">
             <div id="doi-search-section" , class="border">
                 <input id="doi-search-field" type="text" placeholder="DOI" />
-                <button id="doi-search-button">Search</button>
+                <button id="doi-search-button">search</button>
             </div>
 
             <div id="msg-section"></div>
@@ -45,10 +45,10 @@
                         <div id="article-abstract-field" class="border"></div>
                     </div>
 
-                    <div id="article-bibtex" class="border">
+                    <div id="article-cite" class="border">
                         <div class="article-stat-title">Cite</div>
-                        <pre id="article-bibtex-field" class="border"></pre>
-                        <button id="article-bibtex-copy">copy</button>
+                        <pre id="article-cite-field" class="border"></pre>
+                        <button id="article-cite-copy">copy</button>
                     </div>
 
                     <div id="article-stat-citation" class="border">
@@ -80,6 +80,6 @@
             </a>
         </div>
 
-        <script src="scripts/index.js" type="module"></script>
+        <script src="scripts/index.mjs" type="module"></script>
     </body>
 </html>
