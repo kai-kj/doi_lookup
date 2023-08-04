@@ -2,18 +2,15 @@ const doiUrl = `https://doi.org`;
 const crUrl = `https://api.crossref.org/works`;
 const ocUrl = `https://opencitations.net/index/api/v1/metadata`;
 
-export class Article {
+export const DL = {};
+
+DL.Article = class {
     #crData;
     #ocData;
 
     constructor(data) {
         this.#crData = data;
     }
-
-    static from = async function (doi) {
-        const crData = await Article.#getCrData(doi);
-        return crData ? new Article(crData) : null;
-    };
 
     getShortName = function () {
         return `${this.getAuthors()[0].split(`,`)[0]}${this.getYear()}`;
@@ -24,9 +21,7 @@ export class Article {
     };
 
     getAuthors = function () {
-        return this.#crData.author.map(
-            (author) => `${author.family}, ${author.given}`
-        );
+        return this.#crData.author.map((author) => `${author.family}, ${author.given}`);
     };
 
     getPublisher = function () {
@@ -104,42 +99,65 @@ export class Article {
     };
 
     asPlaintext = async function () {
-        return fetch(this.getURL(), {
-            headers: { Accept: `text/x-bibliography` },
-        }).then((response) => response.text());
+        const options = { headers: { Accept: `text/x-bibliography` } };
+        return fetch(this.getURL(), options).then((response) => response.text());
     };
 
     asBibTeX = async function () {
-        return fetch(this.getURL(), {
-            headers: { Accept: `application/x-bibtex` },
-        }).then((response) => response.text());
+        const options = { headers: { Accept: `application/x-bibtex` } };
+        return fetch(this.getURL(), options).then((response) => response.text());
     };
 
     asRIS = async function () {
-        return fetch(this.getURL(), {
-            headers: { Accept: `application/x-research-info-systems` },
-        }).then((response) => response.text());
+        const options = { headers: { Accept: `application/x-research-info-systems` } };
+        return fetch(this.getURL(), options).then((response) => response.text());
     };
+};
 
-    static #getCrData = async function (doi) {
-        try {
-            const local = sessionStorage.getItem(`${crUrl}/${doi}`);
-            if (local) return JSON.parse(local);
-        } catch (error) {
-            console.warn(error);
-        }
+const tryLocal = async function (doi) {
+    try {
+        const data = sessionStorage.getItem(`${crUrl}/${doi}`);
+        if (data) return JSON.parse(data);
+    } catch (error) {}
+    return null;
+};
 
-        const remote = await fetch(`${crUrl}/${doi}`)
+const tryRemote = async function (doi) {
+    try {
+        const data = await fetch(`${crUrl}/${doi}`)
             .then((data) => data.json())
             .then((data) => data.message)
             .catch((error) => console.warn(error));
 
         try {
-            sessionStorage.setItem(`${crUrl}/${doi}`, JSON.stringify(remote));
+            sessionStorage.setItem(`${crUrl}/${doi}`, JSON.stringify(data));
         } catch (error) {
             sessionStorage.clear();
         }
 
-        return remote;
-    };
-}
+        return data;
+    } catch (error) {
+        return null;
+    }
+};
+
+DL.from = async function (doi) {
+    if (!/\S*\/\S*/.test(doi)) return null;
+
+    let data = await tryLocal(doi);
+    if (!data) data = await tryRemote(doi);
+    if (!data) return null;
+    return new DL.Article(data);
+};
+
+DL.query = async function (query, page) {
+    const url = `${crUrl}?sort=relevance&select=DOI&query=${encodeURI(query)}&offset=${page * 20}`;
+    try {
+        return await fetch(url)
+            .then((response) => response.json())
+            .then((response) => response.message.items)
+            .then((response) => response.map((r) => r.DOI));
+    } catch {
+        return [];
+    }
+};

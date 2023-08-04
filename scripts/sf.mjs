@@ -40,21 +40,12 @@ SF.Node = class {
     };
 
     addClass = function (className) {
-        this.setAttribute(
-            `class`,
-            `${this.getAttribute(`class`)} ${className}`.trim()
-        );
+        this.setAttribute(`class`, `${this.getAttribute(`class`)} ${className}`.trim());
         return this;
     };
 
     removeClass = function (className) {
-        this.setAttribute(
-            `class`,
-            this.getAttribute(`class`)
-                .replace(className, ``)
-                .replace(`  `, ` `)
-                .trim()
-        );
+        this.setAttribute(`class`, this.getAttribute(`class`).replace(className, ``).replace(`  `, ` `).trim());
         return this;
     };
 
@@ -73,14 +64,17 @@ SF.Node = class {
 
     children = function () {
         return Array.from(this.#element.childNodes)
-            .map((child) =>
-                child instanceof HTMLElement
-                    ? SF.from(child)
-                    : child instanceof Text
-                    ? child.textContent
-                    : null
-            )
-            .filter((child) => child != null);
+            .map((child) => {
+                switch (child.nodeType) {
+                    case Node.ELEMENT_NODE:
+                        return SF.from(child);
+                    case Node.TEXT_NODE:
+                        return child.textContent.trim();
+                    default:
+                        return null;
+                }
+            })
+            .filter((child) => child != null && child != "");
     };
 
     append = function (child) {
@@ -103,8 +97,7 @@ SF.Node = class {
     };
 
     clear = function () {
-        while (this.#element.firstChild)
-            this.#element.removeChild(this.#element.firstChild);
+        while (this.#element.firstChild) this.#element.removeChild(this.#element.firstChild);
         return this;
     };
 

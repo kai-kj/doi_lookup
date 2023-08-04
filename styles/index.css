@@ -115,7 +115,7 @@ body {
     margin: 0 10%;
 }
 
-#doi-search-section {
+#search-bar-section {
     position: absolute;
     top: 0;
     left: 0;
@@ -126,7 +126,7 @@ body {
     align-items: center;
 }
 
-#doi-search-field {
+#search-bar-field {
     width: 100%;
     border: none;
     outline: none;
@@ -134,7 +134,7 @@ body {
     margin-right: 1rem;
 }
 
-#doi-search-button {
+#search-bar-button {
     float: right;
 }
 
@@ -154,7 +154,7 @@ body {
     justify-content: center;
 }
 
-#home-logo {
+#home-section-logo {
     height: 10rem;
     min-height: 10rem;
     image-rendering: pixelated;
@@ -172,6 +172,39 @@ body {
     display: none;
 }
 
+#search-result-section {
+    position: absolute;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#search-result-footer {
+    position: relative;
+    height: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-result-previous {
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+    width: 3rem;
+    margin-right: 3rem;
+}
+
+#search-result-next {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 3rem;
+    margin-left: 3rem;
+}
+
 #article-section {
     position: absolute;
     top: 5rem;
@@ -182,7 +215,7 @@ body {
     display: none;
 }
 
-#article-info-section {
+#article-header {
     position: absolute;
     top: 0;
     left: 0;
@@ -194,25 +227,25 @@ body {
     justify-content: center;
 }
 
-#article-info-title {
+#article-header-title {
     text-align: center;
     font-size: 18px;
     font-weight: bold;
 }
 
-#article-info-author {
+#article-header-author {
     text-align: center;
     white-space: pre-wrap;
 }
 
-#article-access {
+#article-header-access {
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
     font-size: 16px;
 }
 
-#article-stat-section {
+#article-info {
     position: absolute;
     top: 9rem;
     left: 0;
@@ -220,7 +253,7 @@ body {
     bottom: 0;
 }
 
-.article-stat-title {
+.article-info-title {
     position: absolute;
     top: 0;
     left: 0;
@@ -232,7 +265,7 @@ body {
     align-items: center;
 }
 
-.stat-expand {
+.article-info-expand {
     color: var(--primary-color);
     font-size: 12px;
 
@@ -272,7 +305,7 @@ body {
     font-size: 14px;
 }
 
-#details-expand {
+#article-details-expand {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -319,13 +352,13 @@ body {
     right: 1.5rem;
 }
 
-#cite-expand {
+#article-cite-expand {
     position: absolute;
     left: 0;
     bottom: 0;
 }
 
-.article-stat-list {
+.article-preview-list {
     position: absolute;
     top: 2rem;
     left: 0;
@@ -337,18 +370,18 @@ body {
     overflow-y: auto;
 }
 
-.article-stat-list-item {
+.article-preview {
     overflow: hidden;
     font-size: 14px;
     margin: 0.5rem;
 }
 
-.article-stat-list-item-info {
+.article-preview-info {
     margin-top: 0.5rem;
     white-space: pre;
 }
 
-#article-stat-citation {
+#article-citations {
     position: absolute;
     top: 50%;
     left: 0;
@@ -361,13 +394,13 @@ body {
     background-color: #ffffffff;
 }
 
-#citation-expand {
+#article-citation-expand {
     position: absolute;
     right: 0;
     top: 0;
 }
 
-#article-stat-reference {
+#article-references {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -380,7 +413,7 @@ body {
     background-color: #ffffffff;
 }
 
-#reference-expand {
+#article-reference-expand {
     position: absolute;
     left: 0;
     top: 0;
