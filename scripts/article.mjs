@@ -20,7 +20,7 @@ export class Article {
     };
 
     getTitle = function () {
-        return this.#crData.title[0] || ``;
+        return this.#crData.title[0] || `(unknown)`;
     };
 
     getAuthors = function () {
@@ -30,31 +30,31 @@ export class Article {
     };
 
     getPublisher = function () {
-        return this.#crData.publisher || ``;
+        return this.#crData.publisher || `(unknown)`;
     };
 
     getSource = function () {
-        return this.#crData[`container-title`] || ``;
+        return this.#crData[`container-title`] || `(unknown)`;
     };
 
     getVolume = function () {
-        return this.#crData.volume || ``;
+        return this.#crData.volume || `(unknown)`;
     };
 
     getIssue = function () {
-        return this.#crData.issue || ``;
+        return this.#crData.issue || `(unknown)`;
     };
 
     getPage = function () {
-        return this.#crData.page || ``;
+        return this.#crData.page || `(unknown)`;
     };
 
     getYear = function () {
-        return this.#crData.issued[`date-parts`][0][0] || ``;
+        return this.#crData.issued[`date-parts`][0][0] || `(unknown)`;
     };
 
     getMonth = function () {
-        return this.#crData.issued[`date-parts`][0][1] || ``;
+        return this.#crData.issued[`date-parts`][0][1] || `(unknown)`;
     };
 
     getDOI = function () {
@@ -69,6 +69,10 @@ export class Article {
         return this.#crData.abstract || ``;
     };
 
+    getCitationCountEst = function () {
+        return this.#crData[`is-referenced-by-count`];
+    };
+
     getCitations = async function () {
         if (!this.#ocData)
             this.#ocData = fetch(`${ocUrl}/${this.getDOI()}`)
@@ -80,6 +84,10 @@ export class Article {
             .split(`;`)
             .map((doi) => doi.trim())
             .filter((doi) => doi != ``);
+    };
+
+    getReferenceCountEst = function () {
+        return this.#crData[`references-count`];
     };
 
     getReferences = async function () {

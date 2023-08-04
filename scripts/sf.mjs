@@ -1,44 +1,36 @@
 export const SF = {};
 
 SF.Node = class {
-    #rawElement;
+    #element;
 
-    static fromQuery(query) {
-        return SF.Node.fromRawElement(document.querySelector(query));
+    constructor(element) {
+        this.#element = element;
     }
 
-    static fromQueryAll(query) {
-        return Array.from(document.querySelectorAll(query))
-            .map((element) => SF.Node.fromRawElement(element))
-            .filter((node) => node != null);
-    }
-
-    static fromTag(tag) {
-        let node = new SF.Node();
-        node.#rawElement = document.createElement(tag);
-        return node;
-    }
-
-    static fromRawElement(rawElement) {
-        let node = new SF.Node();
-        node.#rawElement = rawElement;
-        return node;
-    }
-
-    clone = function () {
-        return SF.Node.fromRawElement(this.rawElement.cloneNode(true));
+    query = function (query) {
+        return SF.from(this.#element.querySelector(query));
     };
 
-    getRawElement = function () {
-        return this.#rawElement;
+    queryAll = function (query) {
+        return Array.from(this.#element.querySelectorAll(query))
+            .map((element) => SF.from(element))
+            .filter((node) => node != null);
+    };
+
+    clone = function () {
+        return SF.from(this.element.cloneNode(true));
+    };
+
+    rawElement = function () {
+        return this.#element;
     };
 
     getAttribute = function (attribute) {
-        return this.#rawElement.getAttribute(attribute) || ``;
+        return this.#element.getAttribute(attribute) || ``;
     };
 
     setAttribute = function (attribute, value) {
-        this.#rawElement.setAttribute(attribute, value);
+        this.#element.setAttribute(attribute, value);
         return this;
     };
 
@@ -67,23 +59,23 @@ SF.Node = class {
     };
 
     getStyle = function (style) {
-        return this.#rawElement.style[style];
+        return this.#element.style[style];
     };
 
     setStyle = function (style, value) {
-        this.#rawElement.style[style] = value;
+        this.#element.style[style] = value;
         return this;
     };
 
-    getParent = function () {
-        return SF.Node.fromRawElement(this.#rawElement.parentElement);
+    parent = function () {
+        return SF.from(this.#element.parentElement);
     };
 
-    getChildren = function () {
-        return Array.from(this.#rawElement.childNodes)
+    children = function () {
+        return Array.from(this.#element.childNodes)
             .map((child) =>
                 child instanceof HTMLElement
-                    ? SF.Node.fromRawElement(child)
+                    ? SF.from(child)
                     : child instanceof Text
                     ? child.textContent
                     : null
@@ -91,38 +83,38 @@ SF.Node = class {
             .filter((child) => child != null);
     };
 
-    addChild = function (child) {
+    append = function (child) {
         child instanceof SF.Node
-            ? this.#rawElement.appendChild(child.getRawElement())
+            ? this.#element.appendChild(child.rawElement())
             : typeof child == `string`
-            ? this.#rawElement.appendChild(document.createTextNode(child))
+            ? this.#element.appendChild(document.createTextNode(child))
             : null;
         return this;
     };
 
-    addChildren = function (children) {
-        children.map((child) => this.addChild(child));
+    appendAll = function (children) {
+        children.map((child) => this.append(child));
         return this;
     };
 
-    removeChild = function (child) {
-        this.#rawElement.removeChild(child.getRawElement());
+    remove = function (child) {
+        this.#element.removeChild(child.rawElement());
         return this;
     };
 
     clear = function () {
-        while (this.#rawElement.firstChild)
-            this.#rawElement.removeChild(this.#rawElement.firstChild);
+        while (this.#element.firstChild)
+            this.#element.removeChild(this.#element.firstChild);
         return this;
     };
 
     callEvent = function (event) {
-        this.#rawElement.dispatchEvent(new Event(event));
+        this.#element.dispatchEvent(new Event(event));
         return this;
     };
 
     onEvent = function (event, callback) {
-        this.#rawElement.addEventListener(event, callback);
+        this.#element.addEventListener(event, (e) => callback(this, e));
         return this;
     };
 
@@ -132,14 +124,28 @@ SF.Node = class {
     };
 
     getContents = function () {
-        return this.#rawElement.textContent;
+        return this.#element.textContent;
     };
 
     toString = function () {
-        return this.#rawElement.outerHTML;
+        return this.#element.outerHTML;
     };
 };
 
+SF.from = function (element) {
+    return new SF.Node(element);
+};
+
+SF.new = function (tag) {
+    return SF.from(document.createElement(tag));
+};
+
 SF.query = function (query) {
-    return SF.Node.fromQuery(`${query}`);
+    return SF.from(document.querySelector(query));
+};
+
+SF.queryAll = function (query) {
+    return Array.from(document.querySelectorAll(query))
+        .map((element) => SF.from(element))
+        .filter((node) => node != null);
 };

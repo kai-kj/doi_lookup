@@ -209,6 +209,7 @@ body {
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
+    font-size: 16px;
 }
 
 #article-stat-section {
@@ -340,6 +341,11 @@ body {
     overflow: hidden;
     font-size: 14px;
     margin: 0.5rem;
+}
+
+.article-stat-list-item-info {
+    margin-top: 0.5rem;
+    white-space: pre;
 }
 
 #article-stat-citation {
