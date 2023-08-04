@@ -229,8 +229,10 @@ SF.query(`#search-bar-button`).onEvent(`click`, (_, __) => {
 });
 
 window.onpageshow = async function () {
-    SF.query(`#header-link`).setAttribute(`href`, getURL());
     showArticleNone();
+    SF.query(`#header-link`).setAttribute(`href`, getURL());
+    SF.query(`#search-bar-field`).rawElement().focus();
+    SF.query(`#search-bar-field`).rawElement().select();
 
     const urlParams = new URLSearchParams(window.location.search);
     const term = urlParams.get(`term`);
