@@ -1,5 +1,5 @@
 /*
-    10.1016/j.imavis.2005.02.004
+    10.1093/neuonc/nox106
 */
 
 import { Article } from "./article.mjs";
@@ -72,6 +72,11 @@ const showArticleCurrent = function () {
     SF.query(`#article-cite-plain`).callEvent(`click`);
 
     SF.query(`#article-stat-reference`)
+        .query(`.article-stat-title`)
+        .clear()
+        .append(`References`);
+
+    SF.query(`#article-stat-reference`)
         .query(`.article-stat-list`)
         .clear()
         .append(createSpinner(`12px`))
@@ -83,6 +88,11 @@ const showArticleCurrent = function () {
             node.clear();
             slowForEach(dois, 10, (doi) => node.append(createPreview(doi)));
         });
+
+    SF.query(`#article-stat-citation`)
+        .query(`.article-stat-title`)
+        .clear()
+        .append(`Citations`);
 
     SF.query(`#article-stat-citation`)
         .query(`.article-stat-list`)
