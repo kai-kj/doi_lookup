@@ -100,8 +100,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    z-index: 999;
 }
 
 @media (max-width: 40rem) {
@@ -115,6 +113,7 @@ body {
     height: 4rem;
     image-rendering: pixelated;
     transform: translateY(0.25rem);
+    z-index: 999;
 }
 
 #footer {
