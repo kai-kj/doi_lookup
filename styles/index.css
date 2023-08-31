@@ -262,7 +262,6 @@ body {
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 @media (max-width: 40rem) {
@@ -280,6 +279,10 @@ body {
 #article-header-author {
     text-align: center;
     white-space: pre-wrap;
+}
+
+#article-header-separator {
+    flex: 2;
 }
 
 #article-header-access {
