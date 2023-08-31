@@ -367,10 +367,11 @@ body {
 }
 
 #article-details-table {
-    white-space: pre-wrap;
+    line-break: anywhere;
     text-align: left;
     font-size: 14px;
 }
+
 
 #article-details-expand {
     position: absolute;

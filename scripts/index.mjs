@@ -65,7 +65,7 @@ const showArticle = function (article) {
     SF.query(`#article-header-access`).setAttribute(`href`, article.getURL());
     SF.query(`#article-details-table`)
         .append(tableRow(`Year`, `${article.getYear()}`))
-        .append(tableRow(`Published in`, `${article.getSource()}`))
+        .append(tableRow(`Source`, `${article.getSource()}`))
         .append(tableRow(`Publisher`, `${article.getPublisher()}`))
         .append(tableRow(`Volume`, `${article.getVolume()}`))
         .append(tableRow(`Issue`, `${article.getIssue()}`))
