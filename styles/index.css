@@ -302,7 +302,7 @@ body {
 @media (max-width: 40rem) {
     #article-info {
         top: 14rem;
-        overflow-x: auto;
+        overflow-x: scroll;
     }
 }
 
