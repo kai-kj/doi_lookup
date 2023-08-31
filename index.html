@@ -1,117 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>DOI Lookup</title>
-        <link rel="stylesheet" href="styles/index.css" />
-        <link rel="icon" href="assets/logo.png" />
-        <!-- fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-        <!-- font awesome -->
-        <script src="https://kit.fontawesome.com/4998c9c3e0.js" crossorigin="anonymous"></script>
-    </head>
 
-    <body>
-        <div id="header">
-            <a id="header-link" class="hidden-link" href="">
-                <img id="header-logo" src="assets/logo.png" alt="logo" />
-            </a>
-            DOI Lookup
+<head>
+    <meta charset="UTF-8" />
+    <title>DOI Lookup</title>
+    <link rel="stylesheet" href="styles/index.css" />
+    <link rel="icon" href="assets/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/4998c9c3e0.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="header">
+        <a id="header-link" class="hidden-link" href="">
+            <img id="header-logo" src="assets/logo.png" alt="logo" />
+        </a>
+        DOI Lookup
+    </div>
+
+    <div id="body">
+        <div id="search-bar-section" class="border">
+            <input id="search-bar-field" type="text" placeholder="DOI or search term" />
+            <button id="search-bar-button">search</button>
         </div>
 
-        <div id="body">
-            <div id="search-bar-section" class="border">
-                <input id="search-bar-field" type="text" placeholder="DOI or search term" />
-                <button id="search-bar-button">search</button>
-            </div>
-
-            <div id="home-section">
-                <img id="home-section-logo" src="assets/logo.png" alt="logo" />
-                <div>
-                    <p>
-                        A simple
-                        <a href="https://www.doi.org/the-identifier/what-is-a-doi/"> DOI </a>
-                        lookup tool. The main focus of the tool is to shown relationships (citations and references)
-                        between articles.
-                    </p>
-                    <p>
-                        Article metadata and search functionality is provided by the
-                        <a href="https://www.crossref.org/documentation/retrieve-metadata/rest-api/">
-                            Crossref REST API
-                        </a>
-                        , relationships are provided by the
-                        <a href="https://opencitations.net/index/api/v1"> OpenCitations Indexes unifying REST API </a>
-                        , and citation text is taken from
-                        <a href="https://www.doi.org/">doi.org</a>
-                        (see
-                        <a href="https://citation.crosscite.org/docs.html"> here </a>
-                        for more info).
-                    </p>
-                    <p>
-                        This website is written in vanilla JavaScript, and the source code is available on
-                        <a href="https://github.com/kal39/doi_lookup"> GitHub </a>
-                        .
-                    </p>
-                </div>
-            </div>
-
-            <div id="msg-section"></div>
-
-            <div id="search-result-section" class="border">
-                <div class="article-preview-list"></div>
-            </div>
-
-            <div id="article-section">
-                <div id="article-header" class="border">
-                    <div id="article-header-title"></div>
-                    <div id="article-header-author"></div>
-                    <a id="article-header-access" href="">get access</a>
-                </div>
-
-                <div id="article-info">
-                    <div id="article-details" class="border">
-                        <div class="article-info-title">Details</div>
-                        <div id="article-details-table-container" class="border">
-                            <table id="article-details-table"></table>
-                        </div>
-                        <button id="article-details-expand" class="article-info-expand">expand</button>
-                    </div>
-
-                    <div id="article-cite" class="border">
-                        <div class="article-info-title">Cite</div>
-                        <div id="article-cite-types">
-                            <button id="article-cite-plain">plain text</button>
-                            <button id="article-cite-bib">BibTeX</button>
-                            <button id="article-cite-ris">RIS</button>
-                        </div>
-                        <pre id="article-cite-field" class="border"></pre>
-                        <button id="article-cite-copy">copy</button>
-                        <button id="article-cite-expand" class="article-info-expand">expand</button>
-                    </div>
-
-                    <div id="article-citations" class="border">
-                        <div class="article-info-title">Citations</div>
-                        <div class="article-preview-list"></div>
-                        <button id="article-citation-expand" class="article-info-expand">expand</button>
-                    </div>
-
-                    <div id="article-references" class="border">
-                        <div class="article-info-title">References</div>
-                        <div class="article-preview-list"></div>
-                        <button id="article-reference-expand" class="article-info-expand">expand</button>
-                    </div>
-                </div>
+        <div id="home-section">
+            <div>
+                <p>
+                    A simple
+                    <a href="https://www.doi.org/the-identifier/what-is-a-doi/"> DOI </a>
+                    lookup tool. The main focus of the tool is to shown relationships (citations and references)
+                    between articles.
+                </p>
+                <p>
+                    Article metadata and search functionality is provided by the
+                    <a href="https://www.crossref.org/documentation/retrieve-metadata/rest-api/">
+                        Crossref REST API
+                    </a>
+                    , relationships are provided by the
+                    <a href="https://opencitations.net/index/api/v1"> OpenCitations Indexes unifying REST API </a>
+                    , and citation text is taken from
+                    <a href="https://www.doi.org/">doi.org</a>
+                    (see
+                    <a href="https://citation.crosscite.org/docs.html"> here </a>
+                    for more info).
+                </p>
+                <p>
+                    This website is written in vanilla JavaScript, and the source code is available on
+                    <a href="https://github.com/kal39/doi_lookup"> GitHub </a>
+                    .
+                </p>
             </div>
         </div>
 
-        <div id="footer">
-            <a href="https://github.com/kal39/doi_lookup"> <i class="fab fa-github"></i> kal39/doi_lookup </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="mailto:kaikitagawajones@gmail.com"> <i class="fas fa-envelope"></i> kaikitagawajones@gmail.com </a>
+        <div id="msg-section"></div>
+
+        <div id="search-result-section" class="border">
+            <div class="article-preview-list"></div>
         </div>
 
-        <script src="scripts/index.mjs" type="module"></script>
-    </body>
+        <div id="article-section">
+            <div id="article-header" class="border">
+                <div id="article-header-title"></div>
+                <div id="article-header-author"></div>
+                <a id="article-header-access" href="">get access</a>
+            </div>
+
+            <div id="article-info">
+                <div id="article-details" class="border">
+                    <div class="article-info-title">Details</div>
+                    <div id="article-details-table-container" class="border">
+                        <table id="article-details-table"></table>
+                    </div>
+                    <button id="article-details-expand" class="article-info-expand">expand</button>
+                </div>
+
+                <div id="article-cite" class="border">
+                    <div class="article-info-title">Cite</div>
+                    <div id="article-cite-types">
+                        <button id="article-cite-plain">plain text</button>
+                        <button id="article-cite-bib">BibTeX</button>
+                        <button id="article-cite-ris">RIS</button>
+                    </div>
+                    <pre id="article-cite-field" class="border"></pre>
+                    <button id="article-cite-copy">copy</button>
+                    <button id="article-cite-expand" class="article-info-expand">expand</button>
+                </div>
+
+                <div id="article-citations" class="border">
+                    <div class="article-info-title">Citations</div>
+                    <div class="article-preview-list"></div>
+                    <button id="article-citation-expand" class="article-info-expand">expand</button>
+                </div>
+
+                <div id="article-references" class="border">
+                    <div class="article-info-title">References</div>
+                    <div class="article-preview-list"></div>
+                    <button id="article-reference-expand" class="article-info-expand">expand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <a href="https://github.com/kal39/doi_lookup"> <i class="fab fa-github"></i> kal39/doi_lookup </a>
+        <a href="mailto:kaikitagawajones@gmail.com"> <i class="fas fa-envelope"></i> kaikitagawajones@gmail.com </a>
+    </div>
+
+    <script src="scripts/index.mjs" type="module"></script>
+</body>
+
 </html>

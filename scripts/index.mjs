@@ -55,7 +55,7 @@ const toggleInfoMinMax = function (button, a, b) {
         sect.setStyle(`z-index`, `999`).setStyle(a, `0`).setStyle(b, `0`).setStyle(ma, `0`).setStyle(mb, `0`);
     } else if (button.children()[0].trim() == `collapse`) {
         button.clear().append(`expand`);
-        sect.setStyle(`z-index`, `0`).setStyle(a, `50%`).setStyle(b, `50%`).setStyle(ma, `1rem`).setStyle(mb, `1rem`);
+        sect.setStyle(`z-index`, `0`).setStyle(a, `50%`).setStyle(b, `50%`).setStyle(ma, `0.5rem`).setStyle(mb, `0.5rem`);
     }
 };
 

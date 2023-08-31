@@ -68,11 +68,23 @@ td:last-of-type {
     border: none;
 }
 
-html,
-body {
+html {
     position: relative;
     height: 100%;
-    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    position: relative;
+    width: min(100%, 50rem);
+    margin: 1rem;
+}
+
+@media (max-width: 40rem) {
+    body {
+        width: min(100%, 25rem);
+    }
 }
 
 #header {
@@ -90,6 +102,13 @@ body {
     justify-content: center;
 }
 
+@media (max-width: 40rem) {
+    #header {
+        color: transparent;
+        justify-content: left
+    }
+}
+
 #header-logo {
     height: 3rem;
     image-rendering: pixelated;
@@ -101,6 +120,8 @@ body {
     right: 0;
     bottom: 1rem;
     height: 2rem;
+    display: flex;
+    flex-direction: column;
 
     text-align: center;
 }
@@ -111,8 +132,12 @@ body {
     left: 0;
     right: 0;
     bottom: 4rem;
+}
 
-    margin: 0 10%;
+@media (max-width: 40rem) {
+    #body {
+        top: 1rem;
+    }
 }
 
 #search-bar-section {
@@ -124,6 +149,12 @@ body {
 
     display: flex;
     align-items: center;
+}
+
+@media (max-width: 40rem) {
+    #search-bar-section {
+        left: 4rem;
+    }
 }
 
 #search-bar-field {
@@ -141,8 +172,8 @@ body {
 #home-section {
     position: absolute;
     top: 5rem;
-    left: 15%;
-    right: 15%;
+    left: 10%;
+    right: 10%;
     bottom: 0;
 
     font-size: 18px;
@@ -207,7 +238,7 @@ body {
 
 #article-section {
     position: absolute;
-    top: 5rem;
+    top: 4rem;
     left: 0;
     right: 0;
     bottom: 0;
@@ -222,9 +253,17 @@ body {
     right: 0;
     height: 6rem;
 
+    overflow-y: auto;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 40rem) {
+    #article-header {
+        height: 12rem;
+    }
 }
 
 #article-header-title {
@@ -239,18 +278,24 @@ body {
 }
 
 #article-header-access {
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
+    /* position:absolute; */
     font-size: 16px;
+    text-align: right;
 }
 
 #article-info {
     position: absolute;
-    top: 9rem;
+    top: 8rem;
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+@media (max-width: 40rem) {
+    #article-info {
+        top: 14rem;
+        overflow-x: auto;
+    }
 }
 
 .article-info-title {
@@ -275,6 +320,12 @@ body {
     cursor: pointer;
 }
 
+@media (max-width: 40rem) {
+    .article-info-expand {
+        display: none;
+    }
+}
+
 #article-details {
     position: absolute;
     top: 0;
@@ -282,10 +333,21 @@ body {
     right: 50%;
     bottom: 50%;
 
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
 
     background-color: #ffffffff;
+}
+
+@media (max-width: 40rem) {
+    #article-details {
+        top: 0;
+        left: 0%;
+        height: 90%;
+        width: calc(100% - 4px);
+        margin: 0;
+        padding: 0;
+    }
 }
 
 #article-details-table-container {
@@ -318,10 +380,21 @@ body {
     right: 0;
     bottom: 50%;
 
-    margin-bottom: 1rem;
-    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
 
     background-color: #ffffffff;
+}
+
+@media (max-width: 40rem) {
+    #article-cite {
+        top: 0;
+        left: calc(100% + 1rem);
+        height: 90%;
+        width: calc(100% - 4px);
+        margin: 0;
+        padding: 0;
+    }
 }
 
 #article-cite-types {
@@ -365,7 +438,6 @@ body {
     right: 0;
     bottom: 1rem;
 
-    margin: 0 1rem;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -388,10 +460,21 @@ body {
     right: 50%;
     bottom: 0;
 
-    margin-top: 1rem;
-    margin-right: 1rem;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
 
     background-color: #ffffffff;
+}
+
+@media (max-width: 40rem) {
+    #article-citations {
+        top: 0;
+        left: calc(200% + 2rem);
+        height: 90%;
+        width: calc(100% - 4px);
+        margin: 0;
+        padding: 0;
+    }
 }
 
 #article-citation-expand {
@@ -407,10 +490,21 @@ body {
     right: 0;
     bottom: 0;
 
-    margin-top: 1rem;
-    margin-left: 1rem;
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
 
     background-color: #ffffffff;
+}
+
+@media (max-width: 40rem) {
+    #article-references {
+        top: 0;
+        left: calc(300% + 3rem);
+        height: 90%;
+        width: calc(100% - 4px);
+        margin: 0;
+        padding: 0;
+    }
 }
 
 #article-reference-expand {
