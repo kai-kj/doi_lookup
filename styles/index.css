@@ -109,11 +109,14 @@ body {
     }
 }
 
+#header-link {
+    z-index: 999;
+}
+
 #header-logo {
     height: 4rem;
     image-rendering: pixelated;
     transform: translateY(0.25rem);
-    z-index: 999;
 }
 
 #footer {
