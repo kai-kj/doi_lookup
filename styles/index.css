@@ -112,8 +112,9 @@ body {
 }
 
 #header-logo {
-    height: 3rem;
+    height: 4rem;
     image-rendering: pixelated;
+    transform: translateY(0.25rem);
 }
 
 #footer {
